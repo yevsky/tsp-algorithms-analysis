@@ -1,0 +1,50 @@
+# CLion / IntelliJ
+.idea/
+
+# CMake build directories
+cmake-build-*/
+build/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+Makefile
+
+# Generated binaries / executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Object files
+*.o
+*.obj
+*.lo
+*.slo
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lai
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Debug / symbol files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Temporary / editor files
+*.log
+*.swp
+*.swo
+*~

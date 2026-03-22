@@ -1,0 +1,71 @@
+# ============================================================
+# Plik konfiguracyjny – TSP Project
+# Uruchomienie: ./tsp (program wczytuje config.txt z katalogu roboczego)
+# ============================================================
+
+# Algorytmy do uruchomienia (oddzielone przecinkami, bez spacji)
+# Dostępne wartości: BRUTE, RAND, NN, RNN
+# BRUTE – przegląd zupełny (tylko dla n <= 15, pomijany automatycznie dla większych)
+# RAND  – algorytm losowy (Fisher-Yates shuffle, limit czasu: timeout_rand)
+# NN    – najbliższy sąsiad (uruchamiany ze wszystkich wierzchołków startowych)
+# RNN   – powtarzany najbliższy sąsiad z rozgałęzianiem remisów (limit: timeout_rnn)
+algorithms=BRUTE,RAND,NN,RNN
+
+# ============================================================
+# Instancje TSPLIB / VLSI do wczytania z plików
+# Ścieżki względne od katalogu roboczego, oddzielone przecinkami
+# Obsługiwane formaty: EUC_2D, CEIL_2D, ATT, GEO, EXPLICIT (FULL_MATRIX, UPPER_ROW, LOWER_DIAG_ROW)
+# ============================================================
+use_tsplib=true
+instances=data/berlin52.tsp,data/ftv70.atsp,data/kro124p.atsp,data/xqf131.tsp,data/pma343.tsp,data/rbg443.atsp,data/pr1002.tsp,data/dhb3386.tsp,data/lap7454.tsp,data/dga9698.tsp
+
+# ============================================================
+# Algorytm losowy (RAND)
+# ============================================================
+
+# Maksymalna liczba iteracji (losowań permutacji) – program zatrzyma się wcześniej
+# jeśli upłynie limit czasu timeout_rand
+rand_iterations=100000
+
+# ============================================================
+# Generowanie własnych instancji losowych
+# Używane gdy generate_random=true; wyłączone gdy false
+# Generuje 2 zestawy: symetryczny (TSP) i asymetryczny (ATSP)
+# po (instances_count) instancji każdy, dla n = n_start .. n_end co step
+# ============================================================
+
+# Czy generować własne instancje? (true / false)
+generate_random=true
+
+# Typ generowanego grafu (używane tylko gdy generate_random=true)
+# true  = asymetryczny (ATSP) – różne wagi w obu kierunkach
+# false = symetryczny (TSP)   – wagi w[i][j] == w[j][i]
+asymmetric=false
+
+# Liczba instancji do wygenerowania dla każdego rozmiaru n
+instances_count=10
+
+# Zakres rozmiarów instancji (liczba wierzchołków)
+n_start=6
+n_end=15
+step=1
+
+# ============================================================
+# Plik wyjściowy CSV
+# Kolumny: instance, algorithm, n, time_ms, cost, rel_error
+# rel_error = -1.0 gdy optimum nie jest znane
+# ============================================================
+output=results/results.csv
+
+# ============================================================
+# Limity czasu w minutach
+# ============================================================
+
+# Limit dla algorytmu przeglądu zupełnego (BRUTE)
+timeout_brute=30
+
+# Limit dla algorytmu RNN (powtarzany NN z rozgałęzianiem)
+timeout_rnn=15
+
+# Limit dla algorytmu losowego (RAND)
+timeout_rand=30
